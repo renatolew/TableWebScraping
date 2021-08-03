@@ -1,6 +1,6 @@
 #TableWebScraping
 
-A small project to practice scraping tables from web pages. My goal with this project is to increase my tools to obtain data for further cleaning and analysing. 
+A small project to practice scraping tables from web pages and exporting the dataframe to an excel spreadsheet. My goal with this project is to increase my tools to obtain data for further cleaning and analysing.
 
 In order to execute this project you will need Python installed in your computer. In order to edit or complement the code you will need a text editor or IDE of your choice. I recommend Jetbrains Pycharm. You can find links to install these features below:
 

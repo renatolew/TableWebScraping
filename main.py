@@ -1,6 +1,3 @@
-# To do list:
-# Create Pandas DataFrame
-# Export Data to a .csv or .xlsx file
 
 import requests
 import lxml.html as lh
