@@ -36,6 +36,47 @@ i = 0
 for t in tr_elements[0]:
     i+=1
     name = t.text_content()
-    print('%d:"%s"' % (i, name))
+    # Uncomment the line below if you want to check if the header content is equal to the displayed on target table
+    #print('%d:"%s"' % (i, name))
     col.append((name, []))
 
+# Now that the first row (header) is filled, we store data on the second to last row for the content
+for j in range(1, len(tr_elements)):
+    # T is the j'th row of the table
+    T = tr_elements[j]
+
+    # An if statement to make sure we are only storing the data from our table
+    if len(T)!=10: break
+
+    # Creating an increment for the index of our columns
+    i = 0
+
+    # Now iterating for each element of the row, instead of each row
+    for t in T.iterchildren():
+        data = t.text_content()
+        # Check if row has empty content, if it has I want it to be skipped
+        if i > 0:
+            # If the content is only numerical, I want to store it as an int variable
+            try:
+                data = int(data)
+            except:
+                pass
+        # Append the content data to the empty list of the i'th column
+        col[i][1].append(data)
+        # Increment i to repeat for next columns until the table is over
+        i+=1
+
+# Uncomment the line below to check if the lenght of each column is the same. The printed statement should return equal values to all indexes.
+# print([len(C) for (title,C) in col])
+
+# Creating a data frame to display the stored data with pandas.
+Dict = {title:column for (title,column) in col}
+data_frame = pd.DataFrame(Dict)
+
+# Creating an object to write the content to an excel file and using it to write the dataframe.
+writer = pd.ExcelWriter("pokedex.xlsx")
+data_frame.to_excel(writer)
+
+# Spent way too much trying to figure out why it wasn't working and noticed I forgot to actually save the file.
+writer.save()
+print("Dataframe written in Excel file with success.")
